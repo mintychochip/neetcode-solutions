@@ -1,0 +1,60 @@
+class DynamicArray {
+
+        int[] arr;
+        int size = 0;
+        public DynamicArray(int capacity) {
+            arr = new int[capacity];
+            for(int i = 0; i < capacity; i++) {
+                arr[i] = -1;
+            }
+        }
+
+        public int get(int i) {
+            return arr[i];
+        }
+
+        public void set(int i, int n) {
+            if(i >= this.getCapacity()) {
+                this.resize();
+            }
+            int numIdx = arr[i];
+            if(numIdx == -1) {
+                size++;
+            }
+            if(n == -1 && numIdx != -1) {
+                size--;
+            }
+            arr[i] = n;
+        }
+
+        public void pushback(int n) {
+            this.set(size,n);
+        }
+
+        public int popback() {
+            int idx = this.getSize() - 1;
+            int num = this.get(idx);
+            this.set(idx,-1);
+            return num;
+        }
+
+        private void resize() {
+            int newLength = arr.length << 1;
+            int[] ints = new int[newLength];
+            for(int i = 0; i < arr.length; i++) {
+                ints[i] = arr[i];
+            }
+            for(int i = arr.length; i < newLength; i++) {
+                ints[i] = -1;
+            }
+            this.arr = ints;
+        }
+
+        public int getSize() {
+            return size;
+        }
+
+        public int getCapacity() {
+            return arr.length;
+        }
+    }
