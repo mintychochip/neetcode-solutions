@@ -1,0 +1,10 @@
+class Solution {
+    public int[] getConcatenation(int[] nums) {
+        int len = nums.length; //assuming the array is full
+        int[] arr = new int[len << 1];
+        for(int i = 0; i < len; i++) {
+            arr[i] =  arr[i + len] = nums[i];
+        }
+        return arr;
+    }
+}
