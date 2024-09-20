@@ -1,0 +1,32 @@
+lc-link: https://leetcode.com/problems/evaluate-reverse-polish-notation/
+nc-link: https://neetcode.io/problems/evaluate-reverse-polish-notation
+diff: med
+
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        for(String s : tokens) {
+            if(this.isOperand(s)) {
+                int res = this.evaluate(stack.pop(),stack.pop(),s);
+                stack.push(res);
+            } else {
+                stack.push(Integer.parseInt(s));
+            }
+        }
+        return stack.pop();
+    }
+
+    private boolean isOperand(String s) {
+        return s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/");
+    }
+
+    private int evaluate(int i, int j, String operand) {
+        return switch(operand) {
+                    case "+" -> j + i;
+                    case "-" -> j - i;
+                    case "*" -> j * i;
+                    case "/" -> j / i;
+                    default -> throw new IllegalArgumentException("Invalid operator: " + operand);
+                };
+    }
+}

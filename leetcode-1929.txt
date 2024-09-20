@@ -1,3 +1,6 @@
+lc-link: https://leetcode.com/problems/concatenation-of-array
+diff: easy 
+
 class Solution {
     public int[] getConcatenation(int[] nums) {
         int len = nums.length; //assuming the array is full
